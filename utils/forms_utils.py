@@ -21,7 +21,7 @@ def load_keys(file, out_dict=True):
         for l in f:
             if l[0] == '#':  # ignore comments
                 continue
-            s = re.split(r'[ \t\n]+', l)
+            s = re.split(r'[\t\n]+', l)
             if out_dict:
                 d[s[1]] = s[0], s[2]  # some random stuff at the end
             else:
