@@ -221,8 +221,169 @@ def fill_fields_files():
             f.write("ata_6\n")
             f.write("fuel_rem_6\n")
 
-            for i in range(500):
-                f.write(f"{i}\n")
+            f.write("departure_departure\n")
+            f.write("destination_ground\n")
+
+            f.write("vor_freq_7\n")
+            f.write("course_7\n")
+            f.write("altitude_7\n")
+            f.write("wind_dir_7\n")
+            f.write("wind_vel_7\n")
+            f.write("tas_7\n")
+
+            f.write("vLR_13\n")
+            f.write("vEW_13\n")
+            f.write("vDev_13\n")
+            f.write("vLR_14\n")
+            f.write("vEW_14\n")
+            f.write("vDev_14\n")
+
+            f.write("ch_7\n")
+            f.write("dist_leg_7\n")
+            f.write("gs_est_7\n")
+            f.write("ete_7\n")
+            f.write("eta_7\n")
+            f.write("fuel_7\n")
+
+            f.write("departure_ctaf\n")
+            f.write("destination_ctaf\n")
+
+            f.write("vCheckPoints_8\n")
+            f.write("vor_ident_8\n")
+            f.write("temp_7\n")
+            f.write("dist_rem_7\n")
+            f.write("gs_act_7\n")
+            f.write("ate_7\n")
+            f.write("ata_7\n")
+            f.write("fuel_rem_7\n")
+
+            f.write("departure_fss\n")
+            f.write("destination_fss\n")
+
+            f.write("vor_freq_8\n")
+            f.write("course_8\n")
+            f.write("altitude_8\n")
+            f.write("wind_dir_8\n")
+            f.write("wind_vel_8\n")
+            f.write("tas_8\n")
+
+            f.write("vLR_15\n")
+            f.write("vEW_15\n")
+            f.write("vDev_15\n")
+            f.write("vLR_16\n")
+            f.write("vEW_16\n")
+            f.write("vDev_16\n")
+
+            f.write("ch_8\n")
+            f.write("dist_leg_8\n")
+            f.write("gs_est_8\n")
+            f.write("ete_8\n")
+            f.write("eta_8\n")
+            f.write("fuel_8\n")
+
+            f.write("departure_unicom\n")
+            f.write("destination_unicom\n")
+
+            f.write("temp_8\n")
+
+            f.write("vCheckPoints_9\n")
+            f.write("vor_ident_9\n")
+            f.write("dist_rem_8\n")
+            f.write("gs_act_8\n")
+            f.write("ate_8\n")
+            f.write("ata_8\n")
+            f.write("fuel_rem_8\n")
+
+            f.write("departure_field_elevation\n")
+            f.write("destination_field_elevation\n")
+
+            f.write("vor_freq_9\n")
+
+            f.write("total_rem\n")
+            f.write("total_act\n")
+            f.write("total_ate\n")
+            f.write("total_ata\n")
+            f.write("total_fuel\n")
+
+            f.write("block_in\n")
+            f.write("vFlightPlan\n")
+            f.write("block_out\n")
+            f.write("log_time\n")
+
+            f.write("weather_departure_reported\n")
+            f.write("weather_departure_forecast\n")
+            f.write("weather_departure_winds_aloft\n")
+            f.write("weather_departure_icing\n")
+            f.write("weather_departure_turbulence\n")
+            f.write("weather_departure_position\n")
+
+            f.write("weather_enroute_reported\n")
+            f.write("weather_enroute_forecast\n")
+            f.write("weather_enroute_winds_aloft\n")
+            f.write("weather_enroute_icing\n")
+            f.write("weather_enroute_turbulence\n")
+            f.write("weather_enroute_position\n")
+
+            f.write("weather_destination_reported\n")
+            f.write("weather_destination_forecast\n")
+            f.write("weather_destination_winds_aloft\n")
+            f.write("weather_destination_icing\n")
+            f.write("weather_destination_turbulence\n")
+            f.write("weather_destination_position\n")
+
+            f.write("weather_alternate_reported\n")
+            f.write("weather_alternate_forecast\n")
+            f.write("weather_alternate_winds_aloft\n")
+            f.write("weather_alternate_icing\n")
+            f.write("weather_alternate_turbulence\n")
+            f.write("weather_alternate_position\n")
+
+            f.write("check_vfr\n")
+            f.write("check_ifr\n")
+            f.write("check_dvfr\n")
+
+            f.write("2aircraft_identification\n")
+            f.write("3aircraft_type\n")
+            f.write("4true_airspeed\n")
+            f.write("5departure_point\n")
+
+            f.write("notam_0\n")
+            f.write("notam_1\n")
+
+            f.write("6departure_time_proposed\n")
+            f.write("6departure_time_actual\n")
+            f.write("7cruising_altitude\n")
+            f.write("8route\n")
+
+            f.write("notam_2\n")
+            f.write("notam_3\n")
+
+            f.write("9destination\n")
+            f.write("10ete_hours\n")
+            f.write("10ete_minutes\n")
+            f.write("11remarks\n")
+
+            f.write("notam_4\n")
+            f.write("notam_5\n")
+
+            f.write("12fuel_hours\n")
+            f.write("12fuel_minutes\n")
+
+            f.write("13alternate\n")
+            f.write("14pilot\n")
+            f.write("15num_aboard\n")
+
+            f.write("notam_6\n")
+            f.write("notam_7\n")
+            f.write("notam_8\n")
+
+            f.write("16color\n")
+            f.write("17destination\n")
+
+            f.write("notam_9\n")
+
+            f.write("close_vfr\n")
+            f.write("report_conditions\n")
 
 
 def build_keys(file, keys_name, keys_orig):

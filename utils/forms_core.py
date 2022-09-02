@@ -35,8 +35,8 @@ def fill_contents(d):
             self.d["stuff_4"] = "Here"
             self.d["stuff_10"] = "HereStuffs"
 
-    navlogForm = FormNavLog()
-    navlogForm.build()
-    navlogForm.fill_stuff()
+    navlog_form = FormNavLog()
+    navlog_form.build()
+    navlog_form.fill_stuff()
 
     return forms_state
