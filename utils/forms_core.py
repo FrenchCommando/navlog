@@ -31,5 +31,12 @@ def fill_contents(d):
         def build(self):
             self.d["navlogkey"] = "Blah"
 
-    FormNavLog().build()
+        def fill_stuff(self):
+            self.d["stuff_4"] = "Here"
+            self.d["stuff_10"] = "HereStuffs"
+
+    navlogForm = FormNavLog()
+    navlogForm.build()
+    navlogForm.fill_stuff()
+
     return forms_state
