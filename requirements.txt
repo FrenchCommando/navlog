@@ -8,5 +8,6 @@ pycryptodome
 PyPDF2
 python-dateutil
 pytz
+requests
 six
 sortedcontainers
