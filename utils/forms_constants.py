@@ -10,6 +10,8 @@ fields_mapping_folder = 'fields_mapping'
 output_pdf_folder = "output"
 forms_folder = "forms"
 
+input_json_name = "input.json"
+
 keys_extension = ".keys"
 pdf_extension = ".pdf"
 fields_extension = ".fields"

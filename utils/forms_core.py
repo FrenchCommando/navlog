@@ -29,7 +29,7 @@ def fill_contents(d):
             Form.__init__(self, k_navlog)
 
         def build(self):
-            pass
+            self.d.update(main_info)
 
         def fill_stuff(self):
             self.d["notes_0"] = "VOR Sparta SAX115.70"

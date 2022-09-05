@@ -1,7 +1,7 @@
 import os
 import shutil
 from utils.forms_constants import keys_extension, key_mapping_folder, \
-    fields_mapping_folder, log_extension, json_extension, output_pdf_folder
+    fields_mapping_folder, log_extension, json_extension, output_pdf_folder, input_json_name
 
 
 def remove_by_extension(extension):
@@ -19,10 +19,11 @@ def remove_folder(folder):
 
 
 def clean():
+    # remove input json files
+    remove_by_extension(input_json_name)
+
     # remove log files
     remove_by_extension(log_extension)  # log files are in use, haha
-    # remove json files
-    remove_by_extension(json_extension)
     # remove keys files
     remove_by_extension(keys_extension)
 

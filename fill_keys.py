@@ -15,7 +15,7 @@ def create_empty_fields():
                 open(fields_name, 'x')
                 logger.info("Created fields file for %s", fields_name)
             except FileExistsError as e:
-                logger.debug("Creating fields file for %s -- %s", fields_name, e)
+                logger.debug("Not Creating fields file: already exists for %s -- %s", fields_name, e)
         else:
             logger.info("File ignored %s", u)
 
@@ -448,10 +448,13 @@ def move_keys_to_parent():
             rel = os.path.relpath(u, fields_mapping_folder)
             folder_path = os.path.join(forms_folder, rel)
             try:
-                os.rename(u, folder_path)
+                os.replace(u, folder_path)
                 logger.info("Moved  %s to %s", u, folder_path)
             except FileExistsError as e:
-                logger.warn(f"Already Exists - Not Moved  {u} to {folder_path} - {e}")
+                logger.warn(f"Already Exists - Not Moved  {u} to {folder_path} - {e} - trying again")
+                os.remove(folder_path)
+                os.rename(u, folder_path)
+                logger.info("Moved  %s to %s", u, folder_path)
 
 
 def main():

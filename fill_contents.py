@@ -3,7 +3,6 @@ import json
 from utils.forms_constants import *
 from utils.forms_utils import fill_pdf_from_keys, logging, process_logger, map_folders, load_keys, output_pdf_folder
 from pdfrw import PdfReader, PdfWriter
-from utils.user_interface import update_dict
 from utils.forms_core import fill_contents
 
 
@@ -48,10 +47,6 @@ def gather_inputs(input_folder):
     additional_info = {}
 
     override_stuff = {}
-
-    # update_dict(additional_info)
-    # update_dict(override_stuff)
-    # update_dict(j, modify=False)
 
     data = {}
     data.update(j)

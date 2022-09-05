@@ -10,7 +10,7 @@ from utils.forms_utils import *
 
 def process_pdf(file):
     k_file = os.path.splitext(file)[0] + keys_extension
-    print(file, k_file)
+    # print(file, k_file)
     if not os.path.isfile(k_file):
         d = {}
         d_type = {}  # /Tx for text /Btn for button

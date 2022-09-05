@@ -5,6 +5,7 @@
 import os
 import logging
 import json
+from utils.forms_constants import input_json_name
 from utils.logger import process_logger
 from input_data.parse_data import read_data
 
@@ -14,7 +15,7 @@ process_logger(logger, file_name="json_data")
 
 def build_json(folder):
     data = read_data(folder=folder)
-    with open(os.path.join(folder, 'input.json'), 'w+') as f:
+    with open(os.path.join(folder, input_json_name), 'w+') as f:
         json.dump(data, f, indent=4)
         logger.debug("json dumped %s", f.name)
 

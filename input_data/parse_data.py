@@ -1,35 +1,27 @@
 import os
 import glob
-from collections import defaultdict
-import xml.etree.ElementTree as eTree
+import json
 import logging
+from utils.forms_constants import input_json_name
 
 
 logger = logging.getLogger('input_data')
 
 
-def parse_xml(path, print_tag=False):
-    # parsing xml file
-    tree = eTree.parse(path)
-    root = tree.getroot()
-
-    for u in root:
-        if print_tag:
-            print(u)
-            for t in u:
-                print(t.tag, t.text)
-
-    return root
+def parse_json(path):
+    # parsing json file
+    with open(path, "r") as f:
+        data_json = json.load(f)
+    return data_json
 
 
 def read_data(folder):
-    data = defaultdict(list)
+    data = dict(json=[])
 
     for f in glob.glob(os.path.join(folder, "*")):
         name = os.path.basename(f)
-        name_sub, extension = name.split(".")
-        if extension == 'json':
+        if name == input_json_name:
             continue
-        data_xml = parse_xml(f)
-        data['xml'].append(data_xml)
+        data_json = parse_json(f)
+        data['json'].append(data_json)
     return data
