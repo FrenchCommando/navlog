@@ -43,7 +43,9 @@ def fill_pdf_from_keys(file, out_file, d):
                         if key in d.keys():
                             if annotation[ANNOT_FIELD_TYPE_KEY] == ANNOT_FIELD_TYPE_BTN:
                                 if d[key]:
-                                    annotation.update(pdfrw.PdfDict(AS=next(iter(annotation['/AP']['/N']))))
+                                    annotation.update(pdfrw.PdfDict(
+                                        AS=pdfrw.PdfName('Yes'),
+                                    ))
                                 else:
                                     annotation.update(pdfrw.PdfDict(AS='Off'))
                             elif annotation[ANNOT_FIELD_TYPE_KEY] == ANNOT_FIELD_TYPE_TXT:
@@ -53,7 +55,10 @@ def fill_pdf_from_keys(file, out_file, d):
                                 elif isinstance(r, float) and r != round(r, 2):
                                     r = f'{r:.2f}'
                                 annotation.update(
-                                    pdfrw.PdfDict(V=f'{r}')
+                                    pdfrw.PdfDict(
+                                        AP=f'{r}',
+                                        V=f'{r}',
+                                    )
                                 )
     try:
         pdfrw.PdfWriter().write(out_file, template_pdf)

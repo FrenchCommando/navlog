@@ -40,4 +40,4 @@ if __name__ == '__main__':
 
     fill_contents.main()
 
-    # utils.forms_clean.clean()
+    utils.forms_clean.clean()
