@@ -7,6 +7,7 @@
   "altitude": 4500,
   "temp": 25,
   "vor": ["SAX", "HUO"],
+  "winds": [189, 6],
   "checkpoints": [
     ["KCDW", "SAX145", "HUO168"],
     ["Echo", "SAX105", "HUO168"],

@@ -1,5 +1,5 @@
-from itertools import islice
-from utils.forms_functions import get_main_info, hour_to_hours_minutes_seconds
+from utils.forms_functions import get_main_info, \
+    hour_to_hours_minutes_seconds, get_wind_correction
 from utils.form_worksheet_names import *
 from utils.forms_constants import logger
 
@@ -41,6 +41,8 @@ def fill_contents(d):
             d["notes_1"] = vor_dict[vor2]
             d["cas"] = data["cas"]
 
+            wind_dir, wind_vel = data["winds"]
+
             for i, point in enumerate(data["checkpoints"], 1):
                 checkpoint, vor1_radial, vor2_radial = point
                 d[f"checkpoint_{i}"] = checkpoint
@@ -54,6 +56,26 @@ def fill_contents(d):
                 d[f"tas_{i}"] = tas
                 d[f"tc_{i}"] = tc
                 d[f"dist_leg_{i}"] = leg
+
+                d[f"wind_dir_{i}"] = wind_dir
+                d[f"wind_vel_{i}"] = wind_vel
+
+                gs, lr = get_wind_correction(
+                    tc=tc, tas=tas, wind_dir=wind_dir, wind_vel=wind_vel,
+                )
+                th = tc + lr
+                d[f"lr_{i}"] = f"{lr:.0f}"
+                d[f"th_{i}"] = f"{th:.0f}"
+
+                ew_value = 12
+                dev_value = 0
+                d[f"ew_{i}"] = ew_value
+                d[f"dev_{i}"] = dev_value
+
+                d[f"mh_{i}"] = f"{th + ew_value:.0f}"
+                d[f"ch_{i}"] = f"{th + ew_value + dev_value:.0f}"
+
+                d[f"gs_{i}"] = gs
 
                 d[f"altitude_{i}"] = data["altitude"]
                 d[f"temp_{i}"] = data["temp"]
