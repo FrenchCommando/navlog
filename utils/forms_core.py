@@ -4,8 +4,8 @@ from utils.form_worksheet_names import *
 from utils.forms_constants import logger
 
 
-def fill_contents(d):
-    main_info = get_main_info(d)
+def fill_contents(dict_input):
+    main_info = get_main_info(d=dict_input)
     forms_state = {}  # mapping name of forms with content
 
     class Form:
@@ -26,8 +26,56 @@ def fill_contents(d):
         @staticmethod
         def build_one(data):
             vor_dict = dict(
-                SAX="VOR Sparta SAX115.70",
-                HUO="VOR Hughenot HUO116.1",
+                SAX="VOR Sparta SAX115.70 ... - .--",
+                HUO="VOR Hughenot HUO116.1 .... ..- ---",
+                STW="VOR Stillwater STW109.6 ... - .--",
+                BWZ="VOR Broadway BWZ114.2 -... .-- --..",
+                PTW="VOR Pottstown PTW116.5 .--. - .--",
+                SBJ="VOR Solberg SBJ116.5 .--. - .--"
+            )
+            airport_info = dict(
+                KCDW=dict(
+                    atis=135.5,
+                    ground=121.9,
+                    tower=119.8,
+                    elevation=172.3,
+                    runway="4/22(45)-10/28(37)",
+                    tpa=1200,
+                ),
+                KMSV=dict(
+                    atis=124.725,
+                    ground=None,
+                    tower=None,
+                    ctaf=122.8,
+                    elevation=1403.1,
+                    runway="15/33(62)",
+                    tpa=2400,
+                ),
+                N82=dict(
+                    ctaf=122.8,
+                    atis=119.275,
+                    elevation=548.4,
+                    runway="5/23(35)"
+                ),
+                KMMU=dict(
+                    elevation=186.6,
+                    tower=118.1,
+                    ground=134.2,
+                    atis=124.25,
+                    runway="5/23(59) 13/31(39)"
+                ),
+                KCKZ=dict(
+                    elevation=567.6,
+                    ctaf=123.0,
+                    atis=126.325,
+                    runway="8/26(42)",
+                ),
+                KUKT=dict(
+                    elevation=525.1,
+                    ctaf=122.725,
+                    atis=119.475,
+                    runway="11/29(32)",
+                )
             )
             print(data)
             d = {}
@@ -40,6 +88,11 @@ def fill_contents(d):
             vor1, vor2 = data["vor"]
             d["notes_0"] = vor_dict[vor1]
             d["notes_1"] = vor_dict[vor2]
+            d["notes_2"] = f"TPA for {origin_airport}:\t{airport_info[origin_airport]['tpa']}''"
+            d["notes_3"] = f"TPA for {destination_airport}:\t{airport_info[destination_airport]['tpa']}''"
+
+            alternate = data["alternate"]
+            d["notes_4"] = f"Alternate {alternate}"
             d["cas"] = data["cas"]
 
             wind_dir, wind_vel = data["winds"]
@@ -114,6 +167,21 @@ def fill_contents(d):
                 current_fuel -= float(d[f'fuel_{i}'])
                 d[f"fuel_rem_{i}"] = f"{current_fuel:.1f}"
 
+            departure_info = airport_info[origin_airport]
+            destination_info = airport_info[destination_airport]
+            d["departure_name"] = origin_airport
+            d["destination_name"] = destination_airport
+            d["departure_atis"] = departure_info.get("atis", "")
+            d["departure_ground"] = departure_info.get("ground", "")
+            d["departure_tower"] = departure_info.get("tower", "")
+            d["departure_field_elevation"] = departure_info.get("elevation", "")
+            d["destination_atis"] = destination_info.get("atis", "")
+            d["destination_ctaf"] = destination_info.get("ctaf", "")
+            d["destination_field_elevation"] = destination_info.get("elevation", "")
+
+            d["departure_runway"] = departure_info.get("runway", "")
+            d["destination_runway"] = destination_info.get("runway", "")
+
             d["check_vfr"] = True
             d["aircraft_number"] = aircraft_number[1:]  # without the N
             d["2aircraft_identification"] = aircraft_number
@@ -121,15 +189,14 @@ def fill_contents(d):
             d["4true_airspeed"] = d["tas_2"]
             d["5departure_point"] = origin_airport
             d["6departure_time_proposed"] = f"{data['time']}Z"
-            # d["6departure_time_actual"] = f"{data['time']}Z"
             d["7cruising_altitude"] = d["altitude_2"]
             d["8route"] = "DCT"
             d["9destination"] = destination_airport
             d["10ete_hours"], d["10ete_minutes"], _ = hour_to_hours_minutes_seconds(hours=total_time)
             d["11remarks"] = "StudentPilot cross country with instructor - Century Air"
             d["12fuel_hours"], d["12fuel_minutes"], _ = hour_to_hours_minutes_seconds(hours=fuel_time)
-            d["13alternate"] = data["alternate"]
-            d["14pilot"] = "FrenchCommando 6461112222 KCDW"
+            d["13alternate"] = alternate
+            d["14pilot"] = data["pilot"]
             d["15num_aboard"] = "2"
             d["16color"] = "W"
             return d

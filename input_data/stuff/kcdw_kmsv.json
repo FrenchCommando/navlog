@@ -5,7 +5,7 @@
   "aircraft": "N172YA",
   "fuel": 40,
   "altitude": 4500,
-  "temp": 25,
+  "temp": 20,
   "vor": ["SAX", "HUO"],
   "winds": [189, 6],
   "checkpoints": [
@@ -26,5 +26,6 @@
   "cas": 111,
   "gph": 7.4,
   "time": "1400",
-  "notes": "some notes"
+  "notes": "some notes",
+  "pilot": "FrenchCommando 6461112222 KCDW"
 }
