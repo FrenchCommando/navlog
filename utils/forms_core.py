@@ -114,8 +114,6 @@ def fill_contents(d):
                 current_fuel -= float(d[f'fuel_{i}'])
                 d[f"fuel_rem_{i}"] = f"{current_fuel:.1f}"
 
-            time_enroute = 0.55
-
             d["check_vfr"] = True
             d["aircraft_number"] = aircraft_number[1:]  # without the N
             d["2aircraft_identification"] = aircraft_number
@@ -127,7 +125,7 @@ def fill_contents(d):
             d["7cruising_altitude"] = d["altitude_2"]
             d["8route"] = "DCT"
             d["9destination"] = destination_airport
-            d["10ete_hours"], d["10ete_minutes"], _ = hour_to_hours_minutes_seconds(hours=time_enroute)
+            d["10ete_hours"], d["10ete_minutes"], _ = hour_to_hours_minutes_seconds(hours=total_time)
             d["11remarks"] = "StudentPilot cross country with instructor - Century Air"
             d["12fuel_hours"], d["12fuel_minutes"], _ = hour_to_hours_minutes_seconds(hours=fuel_time)
             d["13alternate"] = data["alternate"]
