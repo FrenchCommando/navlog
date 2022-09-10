@@ -1,6 +1,29 @@
 {
   "origin": "KCDW",
   "destination": "KMSV",
+  "alternate": "N82",
+  "aircraft": "N172YA",
+  "fuel_time": 3.9,
+  "altitude": 4500,
+  "temp": 25,
+  "vor": ["SAX", "HUO"],
+  "checkpoints": [
+    ["KCDW", "SAX145", "HUO168"],
+    ["Echo", "SAX105", "HUO168"],
+    ["Highland", "SAX040", "HUO168"],
+    ["Ridge", "SAX005", "HUO195"],
+    ["Pizza42", "SAX355", "HUO342"],
+    ["KMSV", "SAX355", "HUO345"]
+  ],
+  "route": [
+    [76, 335, 13],
+    [108, 335, 7],
+    [108, 335, 14],
+    [108, 335, 14],
+    [108, 335, 7]
+  ],
   "cas": 111,
+  "gph": 7.4,
+  "time": "1400",
   "notes": "some notes"
 }
