@@ -11,15 +11,6 @@ def fill_contents(d):
     class Form:
         def __init__(self, key):
             self.key = key
-            self.d = {}
-            forms_state[self.key] = self.d
-
-        def push_to_dict(self, key, value, round_i=0):
-            if value != 0:
-                self.d[key] = round(value, round_i)
-
-        def push_sum(self, key, it):
-            self.d[key] = sum(self.d.get(k, 0) for k in it)
 
         def build(self):
             raise NotImplementedError()
@@ -29,41 +20,48 @@ def fill_contents(d):
             Form.__init__(self, k_navlog)
 
         def build(self):
-            self.d.update(main_info)
+            ll = [self.build_one(data=one_info) for one_info in main_info]
+            forms_state[k_navlog] = ll
 
-        def fill_stuff(self):
-            self.d["notes_0"] = "VOR Sparta SAX115.70"
-            self.d["notes_1"] = "VOR Hughenot HUO116.1"
-            self.d["checkpoint_1"] = "KCDW"
-            self.d["checkpoint_2"] = "Echo Lake"
-            self.d["checkpoint_3"] = "Highland Lake"
-            self.d["checkpoint_4"] = "Ridge"
-            self.d["checkpoint_5"] = "Pizza42"
-            self.d["checkpoint_6"] = "KMSV"
+        @staticmethod
+        def build_one(data):
+            print(data)
+            d = {}
+            origin_airport = data["origin"]
+            destination_airport = data["destination"]
+            d["notes"] = data["notes"]
+            d["notes_0"] = "VOR Sparta SAX115.70"
+            d["notes_1"] = "VOR Hughenot HUO116.1"
+            d["checkpoint_1"] = origin_airport
+            d["checkpoint_2"] = "Echo Lake"
+            d["checkpoint_3"] = "Highland Lake"
+            d["checkpoint_4"] = "Ridge"
+            d["checkpoint_5"] = "Pizza42"
+            d["checkpoint_6"] = destination_airport
 
-            self.d["check_vfr"] = True
-            self.d["aircraft_number"] = "734RP"
-            self.d["2aircraft_identification"] = "N734RP"
-            self.d["3aircraft_type"] = "C172"
-            self.d["4true_airspeed"] = "108"
-            self.d["5departure_point"] = "KCDW"
-            self.d["6departure_time_proposed"] = "1200Z"
-            self.d["6departure_time_actual"] = "1215Z"
-            self.d["7cruising_altitude"] = "4500"
-            self.d["8route"] = "DCT"
-            self.d["9destination"] = "KMSV"
-            self.d["10ete_hours"] = "00"
-            self.d["10ete_minutes"] = "35"
-            self.d["11remarks"] = "StudentPilot cross country with instructor - Century Air"
-            self.d["12fuel_hours"] = "04"
-            self.d["12fuel_minutes"] = "00"
-            self.d["13alternate"] = "N82"
-            self.d["14pilot"] = "FrenchCommando 6461112222 KCDW"
-            self.d["15num_aboard"] = "2"
-            self.d["16color"] = "W"
+            d["check_vfr"] = True
+            d["aircraft_number"] = "734RP"
+            d["2aircraft_identification"] = "N734RP"
+            d["3aircraft_type"] = "C172"
+            d["4true_airspeed"] = "108"
+            d["5departure_point"] = origin_airport
+            d["6departure_time_proposed"] = "1200Z"
+            d["6departure_time_actual"] = "1215Z"
+            d["7cruising_altitude"] = "4500"
+            d["8route"] = "DCT"
+            d["9destination"] = destination_airport
+            d["10ete_hours"] = "00"
+            d["10ete_minutes"] = "35"
+            d["11remarks"] = "StudentPilot cross country with instructor - Century Air"
+            d["12fuel_hours"] = "04"
+            d["12fuel_minutes"] = "00"
+            d["13alternate"] = "N82"
+            d["14pilot"] = "FrenchCommando 6461112222 KCDW"
+            d["15num_aboard"] = "2"
+            d["16color"] = "W"
+            return d
 
     navlog_form = FormNavLog()
     navlog_form.build()
-    navlog_form.fill_stuff()
 
     return forms_state
