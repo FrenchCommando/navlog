@@ -186,7 +186,7 @@ def fill_fields_files():
             f.write("fuel_rem_5\n")
 
             f.write("departure_ground\n")
-            f.write("destination_ground\n")
+            f.write("destination_approach\n")
 
             f.write("vor_freq_6\n")
             f.write("course_6\n")

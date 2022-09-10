@@ -1,6 +1,33 @@
 {
   "origin": "KMSV",
   "destination": "KCDW",
-  "cas": 108,
-  "notes": "some other notes"
+  "alternate": "KMMU",
+  "aircraft": "N172YA",
+  "fuel": 35,
+  "altitude": 3500,
+  "temp": 20,
+  "vor": ["SAX", "HUO"],
+  "winds": [189, 6],
+  "checkpoints": [
+    ["KMSV", "SAX355", "HUO345"],
+    ["St Joseph", "SAX355", "HUO342"],
+    ["Ridge", "SAX005", "HUO195"],
+    ["Highland", "SAX040", "HUO168"],
+    ["Echo", "SAX105", "HUO168"],
+    ["N07", "SAX135", "HUO168"],
+    ["KCDW", "SAX145", "HUO168"]
+  ],
+  "route": [
+    [76, 155, 7],
+    [108, 155, 14],
+    [108, 155, 14],
+    [108, 155, 7],
+    [108, 155, 8],
+    [108, 155, 5]
+  ],
+  "cas": 111,
+  "gph": 7.4,
+  "time": "1440",
+  "notes": "some notes",
+  "pilot": "FrenchCommando 6461112222 KCDW"
 }

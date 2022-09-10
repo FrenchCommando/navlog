@@ -44,8 +44,6 @@ def fill_contents(dict_input):
                 ),
                 KMSV=dict(
                     atis=124.725,
-                    ground=None,
-                    tower=None,
                     ctaf=122.8,
                     elevation=1403.1,
                     runway="15/33(62)",
@@ -174,8 +172,11 @@ def fill_contents(dict_input):
             d["departure_atis"] = departure_info.get("atis", "")
             d["departure_ground"] = departure_info.get("ground", "")
             d["departure_tower"] = departure_info.get("tower", "")
+            d["departure_ctaf"] = departure_info.get("ctaf", "")
             d["departure_field_elevation"] = departure_info.get("elevation", "")
             d["destination_atis"] = destination_info.get("atis", "")
+            d["destination_tower"] = destination_info.get("tower", "")
+            d["destination_ground"] = destination_info.get("ground", "")
             d["destination_ctaf"] = destination_info.get("ctaf", "")
             d["destination_field_elevation"] = destination_info.get("elevation", "")
 
