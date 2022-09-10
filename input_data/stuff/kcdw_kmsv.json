@@ -2,7 +2,6 @@
   "origin": "KCDW",
   "destination": "KMSV",
   "alternate": "N82",
-  "aircraft": "N172YA",
   "fuel": 40,
   "altitude": 4500,
   "temp": 20,
@@ -28,6 +27,5 @@
   "cas": 111,
   "gph": 7.4,
   "time": "1400",
-  "notes": "some notes",
-  "pilot": "FrenchCommando 6461112222 KCDW"
+  "notes": "some notes"
 }

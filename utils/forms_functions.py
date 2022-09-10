@@ -3,6 +3,11 @@ import numpy as np
 
 def get_main_info(d):
     info = d['json']
+    for entry in info:
+        entry.update(dict(
+            pilot="FrenchCommando 6461112222 KCDW",
+            aircraft="N172YA",
+        ))
     return info
 
 
