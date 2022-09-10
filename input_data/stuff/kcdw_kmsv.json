@@ -3,7 +3,7 @@
   "destination": "KMSV",
   "alternate": "N82",
   "aircraft": "N172YA",
-  "fuel_time": 3.9,
+  "fuel": 40,
   "altitude": 4500,
   "temp": 25,
   "vor": ["SAX", "HUO"],

@@ -16,6 +16,11 @@ def hour_to_hours_minutes_seconds(hours):
            f"{int(((hours - int(hours)) * 60 - int((hours - int(hours)) * 60)) * 60)}"
 
 
+def revert_to_hours(s):
+    m, s = s.split(":")
+    return (float(s) / 60 + float(m)) / 60
+
+
 def get_wind_correction(
         tc, tas, wind_dir, wind_vel,
 ):

@@ -1,5 +1,5 @@
 from utils.forms_functions import get_main_info, \
-    hour_to_hours_minutes_seconds, get_wind_correction
+    hour_to_hours_minutes_seconds, get_wind_correction, revert_to_hours
 from utils.form_worksheet_names import *
 from utils.forms_constants import logger
 
@@ -34,7 +34,8 @@ def fill_contents(d):
             origin_airport = data["origin"]
             destination_airport = data["destination"]
             aircraft_number = data["aircraft"]
-            fuel_time = data["fuel_time"]
+            gph = data["gph"]
+            fuel_time = data["fuel"] / gph
             d["notes"] = data["notes"]
             vor1, vor2 = data["vor"]
             d["notes_0"] = vor_dict[vor1]
@@ -42,6 +43,8 @@ def fill_contents(d):
             d["cas"] = data["cas"]
 
             wind_dir, wind_vel = data["winds"]
+
+            d["gph"] = gph
 
             for i, point in enumerate(data["checkpoints"], 1):
                 checkpoint, vor1_radial, vor2_radial = point
@@ -55,7 +58,7 @@ def fill_contents(d):
                 d[f"course_{i}"] = tc
                 d[f"tas_{i}"] = tas
                 d[f"tc_{i}"] = tc
-                d[f"dist_leg_{i}"] = leg
+                d[f"dist_leg_{i}"] = f"{leg:.1f}"
 
                 d[f"wind_dir_{i}"] = wind_dir
                 d[f"wind_vel_{i}"] = wind_vel
@@ -75,12 +78,41 @@ def fill_contents(d):
                 d[f"mh_{i}"] = f"{th + ew_value:.0f}"
                 d[f"ch_{i}"] = f"{th + ew_value + dev_value:.0f}"
 
-                d[f"gs_{i}"] = gs
+                d[f"gs_est_{i}"] = f"{gs:.0f}"
 
                 d[f"altitude_{i}"] = data["altitude"]
                 d[f"temp_{i}"] = data["temp"]
 
-            d["gph"] = data["gph"]
+                ete_value = leg / gs
+                ete_h, ete_m, ete_s = hour_to_hours_minutes_seconds(hours=ete_value)
+                d[f"ete_{i}"] = f"{ete_m}:{ete_s}"
+                d[f"fuel_{i}"] = f"{gph * ete_value:.1f}"
+
+            total_dist = sum(float(d[f"dist_leg_{i + 1}"]) for i in range(len(data["route"])))
+            d["remaining_distance"] = f"{total_dist:.0f}"
+            d["total_rem"] = f"{total_dist:.0f}"
+
+            total_time = sum(revert_to_hours(s=d[f"ete_{i + 1}"]) for i in range(len(data["route"])))
+            total_time_h, total_time_m, total_time_s = hour_to_hours_minutes_seconds(hours=total_time)
+
+            d["total_ate"] = f"{total_time_m}:{total_time_s}"
+
+            total_fuel = sum(float(d[f"fuel_{i + 1}"]) for i in range(len(data["route"])))
+            d["total_fuel"] = f"{total_fuel:.1f}"
+
+            current_dist = total_dist
+            current_time = total_time
+            current_fuel = data["fuel"]
+            for i in range(1, len(data["route"]) + 1):
+                current_dist -= float(d[f'dist_leg_{i}'])
+                d[f"dist_rem_{i}"] = f"{current_dist:.1f}"
+
+                current_time -= revert_to_hours(s=d[f"ete_{i}"])
+                eta_h, eta_m, eta_s = hour_to_hours_minutes_seconds(hours=current_time)
+                d[f"eta_{i}"] = f"{eta_m}:{eta_s}"
+
+                current_fuel -= float(d[f'fuel_{i}'])
+                d[f"fuel_rem_{i}"] = f"{current_fuel:.1f}"
 
             time_enroute = 0.55
 
