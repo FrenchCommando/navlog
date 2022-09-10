@@ -53,6 +53,7 @@ def fill_contents(dict_input):
                     ctaf=122.8,
                     atis=119.275,
                     elevation=548.4,
+                    tpa=1600,
                     runway="5/23(35)"
                 ),
                 KMMU=dict(
@@ -60,18 +61,21 @@ def fill_contents(dict_input):
                     tower=118.1,
                     ground=134.2,
                     atis=124.25,
+                    tpa=1200,
                     runway="5/23(59) 13/31(39)"
                 ),
                 KCKZ=dict(
                     elevation=567.6,
                     ctaf=123.0,
                     atis=126.325,
+                    tpa=1600,
                     runway="8/26(42)",
                 ),
                 KUKT=dict(
                     elevation=525.1,
                     ctaf=122.725,
                     atis=119.475,
+                    tpa=1600,
                     runway="11/29(32)",
                 )
             )
@@ -90,7 +94,7 @@ def fill_contents(dict_input):
             d["notes_3"] = f"TPA for {destination_airport}:\t{airport_info[destination_airport]['tpa']}''"
 
             alternate = data["alternate"]
-            d["notes_4"] = f"Alternate {alternate}"
+            d["notes_4"] = f"Alternate {alternate} {airport_info[alternate]}"
             d["cas"] = data["cas"]
 
             wind_dir, wind_vel = data["winds"]

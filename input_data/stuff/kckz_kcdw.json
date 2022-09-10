@@ -1,0 +1,31 @@
+{
+  "origin": "KCKZ",
+  "destination": "KCDW",
+  "alternate": "KMMU",
+  "fuel": 35,
+  "altitude": 3500,
+  "temp": 20,
+  "vor": ["PTW", "STW"],
+  "winds": [242, 4],
+  "checkpoints": [
+    ["KCKZ", "PTW062", "STW039"],
+    ["Road611", "PTW062", "STW032"],
+    ["Delaware", "PTW062", "STW030"],
+    ["Reservoir", "PTW062", "STW005"],
+    ["OldQuary", "PTW062", "STW335"],
+    ["KMMU", "PTW062", "STW310"],
+    ["KCDW", "PTW062", "STW295"]
+  ],
+  "route": [
+    [76, 58, 7],
+    [108, 58, 4],
+    [108, 58, 14],
+    [108, 58, 12.5],
+    [108, 58, 9],
+    [108, 58, 7]
+  ],
+  "cas": 111,
+  "gph": 7.4,
+  "time": "1440",
+  "notes": "some notes"
+}
