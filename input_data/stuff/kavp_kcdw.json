@@ -1,0 +1,35 @@
+{
+  "origin": "KAVP",
+  "destination": "KCDW",
+  "alternate": "KMMU",
+  "fuel": 35,
+  "altitude": 3500,
+  "temp": 20,
+  "vor": ["BWZ", "LVZ"],
+  "winds": [246, 4],
+  "checkpoints": [
+    ["KAVP", "BWZ318", "LVZ345"],
+    ["Watres Reservoir", "BWZ320", "LVZ080"],
+    ["Gouldsboro", "BWZ322", "LVZ110"],
+    ["Mountainhome", "BWZ328", "LVZ117"],
+    ["Delaware", "BWZ345", "LVZ120"],
+    ["Andover", "BWZ028", "LVZ120"],
+    ["Quary", "BWZ067", "LVZ120"],
+    ["Boonton", "BWZ085", "LVZ120"],
+    ["KCDW", "BWZ090", "LVZ120"]
+  ],
+  "route": [
+    [108, 114, 5.5],
+    [108, 114, 7.5],
+    [108, 114, 9],
+    [108, 114, 14],
+    [108, 114, 12],
+    [108, 112, 10],
+    [108, 112, 6],
+    [108, 112, 6]
+  ],
+  "cas": 111,
+  "gph": 7.4,
+  "time": "1400",
+  "notes": "some notes"
+}
