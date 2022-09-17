@@ -6,7 +6,7 @@
   "altitude": 3500,
   "temp": 20,
   "vor": ["BWZ", "LVZ"],
-  "winds": [246, 4],
+  "winds": [244, 4],
   "checkpoints": [
     ["KAVP", "BWZ318", "LVZ345"],
     ["Watres Reservoir", "BWZ320", "LVZ080"],
@@ -30,6 +30,6 @@
   ],
   "cas": 111,
   "gph": 7.4,
-  "time": "1400",
+  "time": "1430",
   "notes": "some notes"
 }

@@ -6,7 +6,7 @@
   "altitude": 4500,
   "temp": 20,
   "vor": ["BWZ", "LVZ"],
-  "winds": [246, 4],
+  "winds": [272, 5],
   "checkpoints": [
     ["KCDW", "BWZ090", "LVZ120"],
     ["Boonton", "BWZ085", "LVZ120"],

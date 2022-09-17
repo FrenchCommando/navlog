@@ -69,7 +69,7 @@ def fill_contents(dict_input):
                     elevation=567.6,
                     ctaf=123.0,
                     atis=126.325,
-                    tpa=1600,
+                    tpa=1400,
                     runway="8/26(42)",
                 ),
                 KUKT=dict(
@@ -94,7 +94,14 @@ def fill_contents(dict_input):
                     atis=120.275,
                     tpa=3000,
                     runway="12/31(50) 5/23(39)",
-                )
+                ),
+                N89=dict(
+                    elevation=292,
+                    ctaf=122.8,
+                    atis="MGJ119.275",
+                    tpa=1300,
+                    runway="4/22(38) 22R",
+                ),
             )
             print(data)
             d = {}

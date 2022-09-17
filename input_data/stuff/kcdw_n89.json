@@ -1,0 +1,33 @@
+{
+  "origin": "KCDW",
+  "destination": "N89",
+  "alternate": "N82",
+  "fuel": 40,
+  "altitude": 4500,
+  "temp": 20,
+  "vor": ["SAX", "HUO"],
+  "winds": [273, 17],
+  "checkpoints": [
+    ["KCDW", "SAX145", "HUO168"],
+    ["LincolnPark", "SAX135", "HUO165"],
+    ["Wanaque", "SAX102", "HUO159"],
+    ["GreenwoodLake", "SAX060", "HUO145"],
+    ["Goshen", "SAX035", "HUO105"],
+    ["Bullville", "SAX027", "HUO065"],
+    ["LakeMaratanza", "SAX022", "HUO042"],
+    ["N89", "SAX021", "HUO038"]
+  ],
+  "route": [
+    [76, 355, 4],
+    [108, 355, 8],
+    [108, 355, 8],
+    [108, 355, 11.5],
+    [108, 355, 9],
+    [108, 355, 8],
+    [108, 355, 3]
+  ],
+  "cas": 111,
+  "gph": 7.4,
+  "time": "1600",
+  "notes": "some notes"
+}

@@ -17,11 +17,9 @@ def parse_json(path):
 
 def read_data(folder):
     data = dict(json=[])
-
-    for f in glob.glob(os.path.join(folder, "*")):
-        name = os.path.basename(f)
-        if name == input_json_name:
-            continue
-        data_json = parse_json(f)
+    with open(os.path.join(folder, "navlog_list.txt"), "r") as f:
+        file_list = f.readlines()
+    for file in file_list:
+        data_json = parse_json(os.path.join(folder, file.strip()))
         data['json'].append(data_json)
     return data

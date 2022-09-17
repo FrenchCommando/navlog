@@ -6,7 +6,7 @@
   "altitude": 3500,
   "temp": 20,
   "vor": ["PTW", "STW"],
-  "winds": [242, 4],
+  "winds": [318, 3],
   "checkpoints": [
     ["KCKZ", "PTW062", "STW039"],
     ["Road611", "PTW062", "STW032"],
