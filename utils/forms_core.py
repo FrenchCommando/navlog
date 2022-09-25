@@ -32,7 +32,8 @@ def fill_contents(dict_input):
                 BWZ="VOR Broadway BWZ114.2 -... .-- --..",
                 PTW="VOR Pottstown PTW116.5 .--. - .--",
                 SBJ="VOR Solberg SBJ116.5 .--. - .--",
-                LVZ="VOR Wilkes-Barre LVZ111.6 .-.. ...- --.."
+                LVZ="VOR Wilkes-Barre LVZ111.6 .-.. ...- --..",
+                ETX="VOR EastTexas ETX110.2 . - -..-"
             )
             airport_info = dict(
                 KCDW=dict(
@@ -101,6 +102,21 @@ def fill_contents(dict_input):
                     atis="MGJ119.275",
                     tpa=1300,
                     runway="4/22(38) 22R",
+                ),
+                KCXY=dict(
+                    elevation=347,
+                    ctaf=119.5,
+                    atis=134.95,
+                    ground=121.9,
+                    tpa=1847,
+                    runway="8/26(50) 12/30(37)",
+                ),
+                k58N=dict(
+                    elevation=489,
+                    ctaf=122.8,
+                    atis="MUI124.175",
+                    tpa=1500,
+                    runway="13/31(19)",
                 ),
             )
             print(data)

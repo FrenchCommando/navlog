@@ -1,0 +1,35 @@
+{
+  "origin": "KCDW",
+  "destination": "KCXY",
+  "alternate": "k58N",
+  "fuel": 40,
+  "altitude": 4500,
+  "temp": 20,
+  "vor": ["ETX", "PTW"],
+  "winds": [208, 19],
+  "checkpoints": [
+    ["KCDW", "ETX083", "PTW064"],
+    ["Mendham", "ETX085", "PTW060"],
+    ["SpruceRun", "ETX088", "PTW053"],
+    ["Delaware", "ETX090", "PTW042"],
+    ["Allentown", "ETX104", "PTW018"],
+    ["Kurztown", "ETX234", "PTW338"],
+    ["BlueMarsh", "ETX250", "PTW304"],
+    ["Reigle Fld", "ETX257", "PTW284"],
+    ["KCXY", "ETX258", "PTW280"]
+  ],
+  "route": [
+    [76, 251, 15],
+    [108, 251, 17.5],
+    [108, 251, 11.5],
+    [108, 251, 14],
+    [108, 251, 14],
+    [108, 251, 15],
+    [108, 251, 24],
+    [108, 251, 13]
+  ],
+  "cas": 111,
+  "gph": 7.4,
+  "time": "1200",
+  "notes": "some notes"
+}
