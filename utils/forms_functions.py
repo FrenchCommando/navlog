@@ -21,9 +21,20 @@ def hour_to_hours_minutes_seconds(hours):
            f"{int(((hours - int(hours)) * 60 - int((hours - int(hours)) * 60)) * 60)}"
 
 
-def revert_to_hours(s):
-    m, s = s.split(":")
-    return (float(s) / 60 + float(m)) / 60
+def time_str_to_string(ete_h, ete_m, ete_s):
+    return f"{ete_h + ':' if ete_h != '0' else ''}{ete_m}:{ete_s}"
+
+
+def revert_to_hours(str_input):
+    tab = str_input.split(":")
+    if len(tab) == 3:
+        h, m, s = tab
+    elif len(tab) == 2:
+        m, s = tab
+        h = "0"
+    else:
+        raise ValueError(str_input)
+    return (float(h) + float(s) / 60 + float(m)) / 60
 
 
 def get_wind_correction(

@@ -1,5 +1,5 @@
 from utils.forms_functions import get_main_info, \
-    hour_to_hours_minutes_seconds, get_wind_correction, revert_to_hours
+    hour_to_hours_minutes_seconds, get_wind_correction, revert_to_hours, time_str_to_string
 from utils.form_worksheet_names import *
 from utils.forms_constants import logger
 
@@ -180,17 +180,17 @@ def fill_contents(dict_input):
 
                 ete_value = leg / gs
                 ete_h, ete_m, ete_s = hour_to_hours_minutes_seconds(hours=ete_value)
-                d[f"ete_{i}"] = f"{ete_m}:{ete_s}"
+                d[f"ete_{i}"] = time_str_to_string(ete_h=ete_h, ete_m=ete_m, ete_s=ete_s)
                 d[f"fuel_{i}"] = f"{gph * ete_value:.1f}"
 
             total_dist = sum(float(d[f"dist_leg_{i + 1}"]) for i in range(len(data["route"])))
             d["remaining_distance"] = f"{total_dist:.0f}"
             d["total_rem"] = f"{total_dist:.0f}"
 
-            total_time = sum(revert_to_hours(s=d[f"ete_{i + 1}"]) for i in range(len(data["route"])))
+            total_time = sum(revert_to_hours(str_input=d[f"ete_{i + 1}"]) for i in range(len(data["route"])))
             total_time_h, total_time_m, total_time_s = hour_to_hours_minutes_seconds(hours=total_time)
 
-            d["total_ate"] = f"{total_time_m}:{total_time_s}"
+            d["total_ate"] = time_str_to_string(ete_h=total_time_h, ete_m=total_time_m, ete_s=total_time_s)
 
             total_fuel = sum(float(d[f"fuel_{i + 1}"]) for i in range(len(data["route"])))
             d["total_fuel"] = f"{total_fuel:.1f}"
@@ -202,9 +202,9 @@ def fill_contents(dict_input):
                 current_dist -= float(d[f'dist_leg_{i}'])
                 d[f"dist_rem_{i}"] = f"{current_dist:.1f}"
 
-                current_time -= revert_to_hours(s=d[f"ete_{i}"])
+                current_time -= revert_to_hours(str_input=d[f"ete_{i}"])
                 eta_h, eta_m, eta_s = hour_to_hours_minutes_seconds(hours=current_time)
-                d[f"eta_{i}"] = f"{eta_m}:{eta_s}"
+                d[f"eta_{i}"] = time_str_to_string(ete_h=eta_h, ete_m=eta_m, ete_s=eta_s)
 
                 current_fuel -= float(d[f'fuel_{i}'])
                 d[f"fuel_rem_{i}"] = f"{current_fuel:.1f}"
