@@ -128,13 +128,17 @@ def fill_contents(dict_input):
             fuel_time = data["fuel"] / gph
             d["notes"] = data["notes"]
             vor1, vor2 = data["vor"]
-            d["notes_0"] = vor_dict[vor1]
-            d["notes_1"] = vor_dict[vor2]
-            d["notes_2"] = f"TPA for {origin_airport}:\t{airport_info[origin_airport]['tpa']}''"
-            d["notes_3"] = f"TPA for {destination_airport}:\t{airport_info[destination_airport]['tpa']}''"
+            d["notes_0"] = f"{vor_dict[vor1]}       {vor_dict[vor2]}"
+            d["notes_1"] = f"TPA for {origin_airport}:\t{airport_info[origin_airport]['tpa']}''         " \
+                           f"TPA for {destination_airport}:\t{airport_info[destination_airport]['tpa']}''"
 
             alternate = data["alternate"]
-            d["notes_4"] = f"Alternate {alternate} {airport_info[alternate]}"
+            d["notes_2"] = f"Alternate {alternate} {airport_info[alternate]}"
+
+            transition_list = data.get("transition", [])
+            for index, airport in zip(["notes_3", "notes_4"], transition_list):
+                d[index] = f"Transition {airport}{airport_info[airport]}"
+
             d["cas"] = data["cas"]
 
             wind_dir, wind_vel = data["winds"]
