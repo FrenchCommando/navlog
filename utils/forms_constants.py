@@ -8,6 +8,7 @@ process_logger(logger, file_name='key_matching')
 key_mapping_folder = 'key_mapping'
 fields_mapping_folder = 'fields_mapping'
 output_pdf_folder = "output"
+flat_pdf_folder = "flatpdf"
 forms_folder = "forms"
 
 input_json_name = "input.json"

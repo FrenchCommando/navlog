@@ -11,3 +11,4 @@ pytz
 requests
 six
 sortedcontainers
+selenium

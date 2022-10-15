@@ -60,6 +60,7 @@ def fill_pdf_from_keys(file, out_file, d):
                                         V=f'{r}',
                                     )
                                 )
+                        annotation.update(pdfrw.PdfDict(Ff=1))
     try:
         pdfrw.PdfWriter().write(out_file, template_pdf)
         logger.info("Exporting PDF file %s succeeded", out_file)
