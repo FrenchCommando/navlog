@@ -1,7 +1,105 @@
+import re
+
 from utils.forms_functions import get_main_info, \
     hour_to_hours_minutes_seconds, get_wind_correction, revert_to_hours, time_str_to_string
 from utils.form_worksheet_names import *
 from utils.forms_constants import logger
+
+
+vor_dict = dict(
+    SAX="VOR Sparta SAX115.70 ... - .--",
+    HUO="VOR Hughenot HUO116.1 .... ..- ---",
+    STW="VOR Stillwater STW109.6 ... - .--",
+    BWZ="VOR Broadway BWZ114.2 -... .-- --..",
+    PTW="VOR Pottstown PTW116.5 .--. - .--",
+    SBJ="VOR Solberg SBJ116.5 .--. - .--",
+    LVZ="VOR Wilkes-Barre LVZ111.6 .-.. ...- --..",
+    ETX="VOR EastTexas ETX110.2 . - -..-"
+)
+airport_info = dict(
+    KCDW=dict(
+        atis=135.5,
+        ground=121.9,
+        tower=119.8,
+        elevation=172.3,
+        runway="4/22(45)-10/28(37)",
+        tpa=1200,
+    ),
+    KMSV=dict(
+        atis=124.725,
+        ctaf=122.8,
+        elevation=1403.1,
+        runway="15/33(62)",
+        tpa=2400,
+    ),
+    N82=dict(
+        ctaf=122.8,
+        atis=119.275,
+        elevation=548.4,
+        tpa=1600,
+        runway="5/23(35)"
+    ),
+    KMMU=dict(
+        elevation=186.6,
+        tower=118.1,
+        ground=134.2,
+        atis=124.25,
+        tpa=1200,
+        runway="5/23(59) 13/31(39)"
+    ),
+    KCKZ=dict(
+        elevation=567.6,
+        ctaf=123.0,
+        atis=126.325,
+        tpa=1400,
+        runway="8/26(42)",
+    ),
+    KUKT=dict(
+        elevation=525.1,
+        ctaf=122.725,
+        atis=119.475,
+        tpa=1600,
+        runway="11/29(32)",
+    ),
+    KAVP=dict(
+        elevation=961.7,
+        tower=120.1,
+        ground=121.9,
+        atis=111.6,
+        unicom=122.95,
+        tpa=2000,
+        runway="4/22(75) 10/28(43)",
+    ),
+    KMPO=dict(
+        elevation=1915.2,
+        ctaf=122.7,
+        atis=120.275,
+        tpa=3000,
+        runway="12/31(50) 5/23(39)",
+    ),
+    N89=dict(
+        elevation=292,
+        ctaf=122.8,
+        atis="MGJ119.275",
+        tpa=1300,
+        runway="4/22(38) 22R",
+    ),
+    KCXY=dict(
+        elevation=347,
+        ctaf=119.5,
+        atis=134.95,
+        ground=121.9,
+        tpa=1847,
+        runway="8/26(50) 12/30(37)",
+    ),
+    k58N=dict(
+        elevation=489,
+        ctaf=122.8,
+        atis="MUI124.175",
+        tpa=1500,
+        runway="13/31(19)",
+    ),
+)
 
 
 def fill_contents(dict_input):
@@ -21,104 +119,11 @@ def fill_contents(dict_input):
 
         def build(self):
             ll = [self.build_one(data=one_info) for one_info in main_info]
-            forms_state[k_navlog] = ll
+            ll_overflow = [one for item in ll for one in self.build_overflown(item)]
+            forms_state[k_navlog] = ll + ll_overflow
 
         @staticmethod
         def build_one(data):
-            vor_dict = dict(
-                SAX="VOR Sparta SAX115.70 ... - .--",
-                HUO="VOR Hughenot HUO116.1 .... ..- ---",
-                STW="VOR Stillwater STW109.6 ... - .--",
-                BWZ="VOR Broadway BWZ114.2 -... .-- --..",
-                PTW="VOR Pottstown PTW116.5 .--. - .--",
-                SBJ="VOR Solberg SBJ116.5 .--. - .--",
-                LVZ="VOR Wilkes-Barre LVZ111.6 .-.. ...- --..",
-                ETX="VOR EastTexas ETX110.2 . - -..-"
-            )
-            airport_info = dict(
-                KCDW=dict(
-                    atis=135.5,
-                    ground=121.9,
-                    tower=119.8,
-                    elevation=172.3,
-                    runway="4/22(45)-10/28(37)",
-                    tpa=1200,
-                ),
-                KMSV=dict(
-                    atis=124.725,
-                    ctaf=122.8,
-                    elevation=1403.1,
-                    runway="15/33(62)",
-                    tpa=2400,
-                ),
-                N82=dict(
-                    ctaf=122.8,
-                    atis=119.275,
-                    elevation=548.4,
-                    tpa=1600,
-                    runway="5/23(35)"
-                ),
-                KMMU=dict(
-                    elevation=186.6,
-                    tower=118.1,
-                    ground=134.2,
-                    atis=124.25,
-                    tpa=1200,
-                    runway="5/23(59) 13/31(39)"
-                ),
-                KCKZ=dict(
-                    elevation=567.6,
-                    ctaf=123.0,
-                    atis=126.325,
-                    tpa=1400,
-                    runway="8/26(42)",
-                ),
-                KUKT=dict(
-                    elevation=525.1,
-                    ctaf=122.725,
-                    atis=119.475,
-                    tpa=1600,
-                    runway="11/29(32)",
-                ),
-                KAVP=dict(
-                    elevation=961.7,
-                    tower=120.1,
-                    ground=121.9,
-                    atis=111.6,
-                    unicom=122.95,
-                    tpa=2000,
-                    runway="4/22(75) 10/28(43)",
-                ),
-                KMPO=dict(
-                    elevation=1915.2,
-                    ctaf=122.7,
-                    atis=120.275,
-                    tpa=3000,
-                    runway="12/31(50) 5/23(39)",
-                ),
-                N89=dict(
-                    elevation=292,
-                    ctaf=122.8,
-                    atis="MGJ119.275",
-                    tpa=1300,
-                    runway="4/22(38) 22R",
-                ),
-                KCXY=dict(
-                    elevation=347,
-                    ctaf=119.5,
-                    atis=134.95,
-                    ground=121.9,
-                    tpa=1847,
-                    runway="8/26(50) 12/30(37)",
-                ),
-                k58N=dict(
-                    elevation=489,
-                    ctaf=122.8,
-                    atis="MUI124.175",
-                    tpa=1500,
-                    runway="13/31(19)",
-                ),
-            )
             print(data)
             d = {}
             origin_airport = data["origin"]
@@ -249,6 +254,51 @@ def fill_contents(dict_input):
             d["15num_aboard"] = "2"
             d["16color"] = "W"
             return d
+
+        @staticmethod
+        def build_overflown(item):
+            checkpoint_indices = [
+                int(re.match(
+                    pattern=r"checkpoint_(?P<value>.*)",
+                    string=key,
+                ).groupdict()['value'])
+                for key in item.keys() if re.match(
+                    pattern=r"checkpoint_(?P<value>.*)",
+                    string=key,
+                ) is not None
+            ]
+            print(item)
+            print(checkpoint_indices)
+            numbered_keys_to_copy_point = [
+                'checkpoint',
+                'vor_ident',
+                'vor_freq',
+            ]
+            numbered_keys_to_copy_leg = [
+                'course', 'tas', 'tc',
+                'dist_leg', 'wind_dir', 'wind_vel',
+                'lr', 'th', 'ew', 'dev', 'mh', 'ch',
+                'gs_est', 'altitude',
+                'temp', 'ete', 'fuel',
+                'dist_rem', 'fuel_rem', 'eta',
+            ]
+            max_checkpoint = max(checkpoint_indices)
+            last_printed_checkpoint = min(max_checkpoint, 9)
+            out_data = []
+            while max_checkpoint > last_printed_checkpoint:
+                data_d = item.copy()
+                index_shift = last_printed_checkpoint - 1
+                for i in range(1, 10):
+                    for key in numbered_keys_to_copy_point:
+                        point_index = index_shift + i
+                        data_d[f"{key}_{i}"] = "" if point_index > max_checkpoint else data_d[f"{key}_{point_index}"]
+                for i in range(1, 9):
+                    for key in numbered_keys_to_copy_leg:
+                        leg_index = index_shift + i
+                        data_d[f"{key}_{i}"] = "" if leg_index >= max_checkpoint else data_d[f"{key}_{leg_index}"]
+                last_printed_checkpoint += 8
+                out_data.append(data_d)
+            return out_data
 
     navlog_form = FormNavLog()
     navlog_form.build()
