@@ -17,7 +17,7 @@ appState = {
     "version": 2
 }
 
-chrome_driver_path = os.path.join(os.path.expanduser('~'), "chromedriver.exe")
+chrome_driver_path = os.path.join(os.path.expanduser('~'), "chromedriver")
 
 
 def flatten_with_chrome(file, folder):
