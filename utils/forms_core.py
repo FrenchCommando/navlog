@@ -14,7 +14,8 @@ vor_dict = dict(
     PTW="VOR Pottstown PTW116.5 .--. - .--",
     SBJ="VOR Solberg SBJ116.5 .--. - .--",
     LVZ="VOR Wilkes-Barre LVZ111.6 .-.. ...- --..",
-    ETX="VOR EastTexas ETX110.2 . - -..-"
+    ETX="VOR EastTexas ETX110.2 . - -..-",
+    LRP="VOR Lancaster LRP117.3 ._.. ._. .__."
 )
 airport_info = dict(
     KCDW=dict(
@@ -132,8 +133,7 @@ def fill_contents(dict_input):
             gph = data["gph"]
             fuel_time = data["fuel"] / gph
             d["notes"] = data["notes"]
-            vor1, vor2 = data["vor"]
-            d["notes_0"] = f"{vor_dict[vor1]}       {vor_dict[vor2]}"
+            d["notes_0"] = "    ".join(f"{vor_dict[vor_single]}" for vor_single in data["vor"])
             d["notes_1"] = f"TPA for {origin_airport}:\t{airport_info[origin_airport]['tpa']}''         " \
                            f"TPA for {destination_airport}:\t{airport_info[destination_airport]['tpa']}''"
 
