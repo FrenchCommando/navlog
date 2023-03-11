@@ -102,6 +102,15 @@ airport_info = dict(
     ),
 )
 
+climb_performance = {
+    0: dict(Time=0, Fuel=0, Distance=0),
+    2000: dict(Time=3, Fuel=0.6, Distance=4),
+    2500: dict(Time=4, Fuel=0.8, Distance=5),
+    3500: dict(Time=6, Fuel=1.2, Distance=7.5),
+    4500: dict(Time=8, Fuel=1.6, Distance=10),
+    5500: dict(Time=10, Fuel=2, Distance=12.5),
+}
+
 
 def fill_contents(dict_input):
     main_info = get_main_info(d=dict_input)
@@ -156,8 +165,9 @@ def fill_contents(dict_input):
                 d[f"vor_ident_{i}"] = vor1_radial
                 d[f"vor_freq_{i}"] = vor2_radial
 
+            prev_altitude = 0
             for i, route in enumerate(data["route"], 1):
-                tas, tc, leg = route
+                tas, tc, leg, altitude = route
 
                 d[f"course_{i}"] = tc
                 d[f"tas_{i}"] = tas
@@ -184,13 +194,31 @@ def fill_contents(dict_input):
 
                 d[f"gs_est_{i}"] = f"{gs:.0f}"
 
-                d[f"altitude_{i}"] = data["altitude"]
+                d[f"altitude_{i}"] = altitude
                 d[f"temp_{i}"] = data["temp"]
 
-                ete_value = leg / gs
+                if prev_altitude == 0:
+                    taxi_fuel = 1.1
+                else:
+                    taxi_fuel = 0
+
+                if prev_altitude != altitude:
+                    prev_altitude_perf = climb_performance[prev_altitude]
+                    altitude_perf = climb_performance[altitude]
+                    climb_distance, climb_time, climb_fuel = \
+                        altitude_perf["Distance"] - prev_altitude_perf["Distance"], \
+                        (altitude_perf["Time"] - prev_altitude_perf["Time"]) / 60, \
+                        altitude_perf["Fuel"] - prev_altitude_perf["Fuel"]
+                else:
+                    climb_distance, climb_time, climb_fuel = 0, 0, 0
+
+                time_not_climb = (leg - climb_distance) / gs
+                ete_value = time_not_climb + climb_time
+                fuel_value = gph * time_not_climb + climb_fuel + taxi_fuel
                 ete_h, ete_m, ete_s = hour_to_hours_minutes_seconds(hours=ete_value)
                 d[f"ete_{i}"] = time_str_to_string(ete_h=ete_h, ete_m=ete_m, ete_s=ete_s)
-                d[f"fuel_{i}"] = f"{gph * ete_value:.1f}"
+                d[f"fuel_{i}"] = f"{fuel_value:.1f}"
+                prev_altitude = altitude
 
             total_dist = sum(float(d[f"dist_leg_{i + 1}"]) for i in range(len(data["route"])))
             d["remaining_distance"] = f"{total_dist:.0f}"
