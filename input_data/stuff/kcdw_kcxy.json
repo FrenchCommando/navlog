@@ -6,8 +6,8 @@
   "fuel": 40,
   "altitude": 5500,
   "temp": 5,
-  "vor": ["ETX", "PTW", "LRP"],
-  "winds": [46, 23],
+  "vor": ["ETX", "SBJ", "LRP"],
+  "winds": [143, 8],
   "checkpoints": [
     ["KCDW", "ETX083", "SBJ060"],
     ["KMMU", "ETX084", "SBJ052"],
