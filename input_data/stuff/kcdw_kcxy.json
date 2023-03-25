@@ -5,9 +5,9 @@
   "transition": ["KMMU"],
   "fuel": 40,
   "altitude": 5500,
-  "temp": 5,
+  "temp": 11,
   "vor": ["ETX", "SBJ", "LRP"],
-  "winds": [143, 8],
+  "winds": [285, 43],
   "checkpoints": [
     ["KCDW", "ETX083", "SBJ060"],
     ["KMMU", "ETX084", "SBJ052"],
@@ -51,6 +51,6 @@
   ],
   "cas": 111,
   "gph": 7.4,
-  "time": "1700",
-  "notes": "Bravo - SOLBERG112.9SBJ radial028"
+  "time": "1600",
+  "notes": "Bravo - SOLBERG112.9SBJ radial028 - HarrisburgTRSA 118.25(310-079), ATIS118.8"
 }
