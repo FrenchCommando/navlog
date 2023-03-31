@@ -153,6 +153,39 @@ climb_performance = {
 }
 
 
+def interpolate(ts, value):
+    if value in ts:
+        return ts[value]
+    left = 0
+    right = 0
+    for t, v in ts.items():
+        right = t
+        if t < value:
+            left = t
+        else:
+            break
+    return ts[left] + (value - left) * (ts[right] - ts[left]) / (right - left)
+
+
+def get_dev_value(mh):
+    deviation_card = {
+        0: 0,
+        30: 0,
+        60: 1,
+        90: 1,
+        120: 0,
+        150: 0,
+        180: 0,
+        210: 0,
+        240: 1,
+        270: 2,
+        300: 2,
+        330: 0,
+        360: 0,
+    }
+    return interpolate(deviation_card, mh)
+
+
 def fill_contents(dict_input):
     main_info = get_main_info(d=dict_input)
     forms_state = {}  # mapping name of forms with content
@@ -225,13 +258,15 @@ def fill_contents(dict_input):
                 d[f"lr_{i}"] = f"{lr:.0f}"
                 d[f"th_{i}"] = f"{th:.0f}"
 
-                ew_value = 12
-                dev_value = 0
+                ew_value = -10
                 d[f"ew_{i}"] = ew_value
-                d[f"dev_{i}"] = dev_value
 
-                d[f"mh_{i}"] = f"{th + ew_value:.0f}"
-                d[f"ch_{i}"] = f"{th + ew_value + dev_value:.0f}"
+                mh_value = th + ew_value
+                d[f"mh_{i}"] = f"{mh_value:.0f}"
+
+                dev_value = get_dev_value(mh=mh_value)
+                d[f"dev_{i}"] = dev_value
+                d[f"ch_{i}"] = f"{mh_value + dev_value:.0f}"
 
                 d[f"gs_est_{i}"] = f"{gs:.0f}"
 
