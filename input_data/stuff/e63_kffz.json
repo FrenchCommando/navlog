@@ -1,0 +1,33 @@
+{
+  "origin": "kE63",
+  "destination": "KFFZ",
+  "alternate": "KIWA",
+  "fuel": 20,
+  "altitude": 5500,
+  "temp": 20,
+  "vor": ["IWA", "TFD", "GBN"],
+  "winds": [285, 3],
+  "checkpoints": [
+    ["kE63", "GBNX", "TFD265"],
+    ["Cemetery", "GBN069", "TFD268"],
+    ["Severe", "GBN070", "TFD277"],
+    ["NorthTestTrack", "GBN068", "TFD343"],
+    ["Sacaton", "IWA185", "TFD025"],
+    ["Rittenhouse", "IWA112", "TFD030"],
+    ["Apache", "IWA024", "TFD018"],
+    ["KFFZ", "IWA320", "TFD002"]
+  ],
+  "route": [
+    [75, 83, 6, 3500],
+    [108, 85, 15, 5500],
+    [108, 77, 18, 5500],
+    [108, 84, 10, 5500],
+    [108, 60, 10, 5500],
+    [108, 351, 10, 5500],
+    [108, 287, 9, 3500]
+  ],
+  "cas": 111,
+  "gph": 7.4,
+  "time": "1900",
+  "notes": "Some notes"
+}

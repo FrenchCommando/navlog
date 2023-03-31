@@ -1,0 +1,37 @@
+{
+  "origin": "KFFZ",
+  "destination": "KRYN",
+  "alternate": "KIWA",
+  "fuel": 40,
+  "altitude": 5500,
+  "temp": 20,
+  "vor": ["IWA", "TFD", "TUS"],
+  "winds": [285, 3],
+  "checkpoints": [
+    ["KFFZ", "IWA320", "TDF002"],
+    ["Apache", "IWA024", "TDF018"],
+    ["Rittenhouse", "IWA112", "TDF030"],
+    ["JohnsonRanch", "IWA140", "TDF034"],
+    ["CasaGrande", "IWA160", "TDF054"],
+    ["Reservoir", "IWA150", "TDF083"],
+    ["NewmanPeak", "TUS315", "TDF098"],
+    ["SilverBell", "TUS288", "TDF133"],
+    ["UltralightStrip", "TUS285", "TDF130"],
+    ["KRYN", "TUS269", "TDF129"]
+  ],
+  "route": [
+    [75, 107, 9, 3500],
+    [108, 171, 10, 3500],
+    [108, 204, 6, 5500],
+    [108, 192, 10, 7500],
+    [108, 145, 11, 7500],
+    [108, 150, 9, 7500],
+    [108, 197, 21, 7500],
+    [108, 130, 10, 5500],
+    [108, 136, 12, 3500]
+  ],
+  "cas": 111,
+  "gph": 7.4,
+  "time": "1700",
+  "notes": "Some notes"
+}

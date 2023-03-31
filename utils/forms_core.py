@@ -15,7 +15,11 @@ vor_dict = dict(
     SBJ="VOR Solberg SBJ112.9 ... _... .___",
     LVZ="VOR Wilkes-Barre LVZ111.6 .-.. ...- --..",
     ETX="VOR EastTexas ETX110.2 . - -..-",
-    LRP="VOR Lancaster LRP117.3 ._.. ._. .__."
+    LRP="VOR Lancaster LRP117.3 ._.. ._. .__.",
+    IWA="VOR Willie IWA113.3 .. .__ ._",
+    TFD="VOR Stanfield TFD114.8 _ .._. _..",
+    TUS="VOR Tucson TUS116.0 _ .._ ...",
+    GBN="VOR GilaBend GBN116.6 __. _... _."
 )
 airport_info = dict(
     KCDW=dict(
@@ -100,6 +104,41 @@ airport_info = dict(
         tpa=1500,
         runway="13/31(19)",
     ),
+    KFFZ=dict(
+        atis=118.25,
+        ground=121.3,
+        tower=124.6,
+        elevation=1394,
+        runway="4L/22R(51)-4R/22L(38)",
+        tpa=2400,
+        approach="Phoenix120.7"
+    ),
+    KRYN=dict(
+        ctaf=125.8,
+        ground=118.2,
+        tower=125.8,
+        atis="AWOS-3:133.35",
+        elevation=2418.9,
+        runway="6L/24R(right)(49)-6R(right)/24L(55)",
+        tpa=3218.9,
+        approach="Tucson128.5"
+    ),
+    KIWA=dict(
+        atis=133.5,
+        ground=128.25,
+        tower=120.6,
+        elevation=1384.1,
+        runway="12L/30R(102)-12R(right)/30L(104)",
+        tpa=2602.1,
+        approach="Phoenix124.9"
+    ),
+    kE63=dict(
+        ctaf=122.8,
+        elevation=788.7,
+        runway="4/22(52)",
+        tpa=1588.7,
+    ),
+
 )
 
 climb_performance = {
@@ -109,6 +148,8 @@ climb_performance = {
     3500: dict(Time=6, Fuel=1.2, Distance=7.5),
     4500: dict(Time=8, Fuel=1.6, Distance=10),
     5500: dict(Time=10, Fuel=2, Distance=12.5),
+    6500: dict(Time=12.5, Fuel=2.4, Distance=16),
+    7500: dict(Time=15.5, Fuel=2.85, Distance=20),
 }
 
 
@@ -202,7 +243,7 @@ def fill_contents(dict_input):
                 else:
                     taxi_fuel = 0
 
-                if prev_altitude != altitude:
+                if prev_altitude < altitude:
                     prev_altitude_perf = climb_performance[prev_altitude]
                     altitude_perf = climb_performance[altitude]
                     climb_distance, climb_time, climb_fuel = \

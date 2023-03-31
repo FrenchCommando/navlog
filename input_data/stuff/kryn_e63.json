@@ -1,0 +1,33 @@
+{
+  "origin": "KRYN",
+  "destination": "kE63",
+  "alternate": "KIWA",
+  "fuel": 30,
+  "altitude": 6500,
+  "temp": 20,
+  "vor": ["GBN", "TFD", "TUS"],
+  "winds": [285, 3],
+  "checkpoints": [
+    ["KRYN", "TUS269", "TDF129"],
+    ["UltralightStrip", "TUS285", "TDF130"],
+    ["SilverBell", "TUS288", "TDF133"],
+    ["TanksBuildings", "TUS288", "TDF162"],
+    ["FlyerPeak", "TUS288", "TDF218"],
+    ["SouthMariposa", "GBN106", "TDF250"],
+    ["Route8", "GBN106", "TDF260"],
+    ["kE63", "GBNX", "TDF265"]
+  ],
+  "route": [
+    [75, 316, 12, 6500],
+    [108, 310, 10, 6500],
+    [108, 300, 21, 6500],
+    [108, 300, 17, 6500],
+    [108, 300, 15, 6500],
+    [108, 300, 9, 4500],
+    [108, 300, 6, 2000]
+  ],
+  "cas": 111,
+  "gph": 7.4,
+  "time": "1800",
+  "notes": "122.1Com1 Nav1 116.6Nav1 - Prescott Radio, Skyhawk Nxxxxx is receiving on the GilaBendVOR, requesting weather at GilaBend"
+}
