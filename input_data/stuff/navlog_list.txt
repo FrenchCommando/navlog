@@ -1,3 +1,2 @@
-kffz_kryn.json
-kryn_e63.json
-e63_kffz.json
+kffz_ksez.json
+ksez_kffz.json

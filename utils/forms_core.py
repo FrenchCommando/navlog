@@ -138,6 +138,20 @@ airport_info = dict(
         runway="4/22(52)",
         tpa=1588.7,
     ),
+    KSEZ=dict(
+        atis="AWOS-3PT 118.525",
+        ctaf=123.0,
+        elevation=4830,
+        runway="3/21(51)",
+        tpa=6000.0,
+    ),
+    KPAN=dict(
+        atis="AWOS-3PT 119.325",
+        ctaf=122.8,
+        elevation=5156,
+        runway="6/24(55)",
+        tpa=6200.0,
+    ),
 
 )
 
@@ -150,7 +164,13 @@ climb_performance = {
     5500: dict(Time=10, Fuel=2, Distance=12.5),
     6500: dict(Time=12.5, Fuel=2.4, Distance=16),
     7500: dict(Time=15.5, Fuel=2.85, Distance=20),
+    8000: dict(Time=17, Fuel=3.1, Distance=22),
+    9000: dict(Time=20, Fuel=3.6, Distance=26),
+    10000: dict(Time=24, Fuel=4.2, Distance=32),
 }
+climb_performance_time = {alt: v["Time"] for alt, v in climb_performance.items()}
+climb_performance_fuel = {alt: v["Fuel"] for alt, v in climb_performance.items()}
+climb_performance_distance = {alt: v["Distance"] for alt, v in climb_performance.items()}
 
 
 def interpolate(ts, value):
@@ -184,6 +204,17 @@ def get_dev_value(mh):
         360: 0,
     }
     return interpolate(deviation_card, mh)
+
+
+def get_climb_performance(prev_altitude, default=None):
+    print(prev_altitude)
+    if prev_altitude is None:
+        return get_climb_performance(prev_altitude=default)
+    return dict(
+        Time=interpolate(ts=climb_performance_time, value=prev_altitude),
+        Fuel=interpolate(ts=climb_performance_fuel, value=prev_altitude),
+        Distance=interpolate(ts=climb_performance_distance, value=prev_altitude),
+    )
 
 
 def fill_contents(dict_input):
@@ -239,7 +270,7 @@ def fill_contents(dict_input):
                 d[f"vor_ident_{i}"] = vor1_radial
                 d[f"vor_freq_{i}"] = vor2_radial
 
-            prev_altitude = 0
+            prev_altitude = None
             for i, route in enumerate(data["route"], 1):
                 tas, tc, leg, altitude = route
 
@@ -273,14 +304,17 @@ def fill_contents(dict_input):
                 d[f"altitude_{i}"] = altitude
                 d[f"temp_{i}"] = data["temp"]
 
-                if prev_altitude == 0:
+                if prev_altitude is None:
                     taxi_fuel = 1.1
                 else:
                     taxi_fuel = 0
 
-                if prev_altitude < altitude:
-                    prev_altitude_perf = climb_performance[prev_altitude]
-                    altitude_perf = climb_performance[altitude]
+                if prev_altitude is None or prev_altitude < altitude:
+                    prev_altitude_perf = get_climb_performance(
+                        prev_altitude,
+                        default=airport_info[origin_airport]['tpa']
+                    )
+                    altitude_perf = get_climb_performance(altitude)
                     climb_distance, climb_time, climb_fuel = \
                         altitude_perf["Distance"] - prev_altitude_perf["Distance"], \
                         (altitude_perf["Time"] - prev_altitude_perf["Time"]) / 60, \

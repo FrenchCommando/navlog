@@ -1,0 +1,29 @@
+{
+  "origin": "KSEZ",
+  "destination": "KFFZ",
+  "alternate": "KPAN",
+  "fuel": 30,
+  "altitude": 9500,
+  "temp": 10,
+  "vor": ["IWA", "TFD", "TUS"],
+  "winds": [235, 23],
+  "checkpoints": [
+    ["KSEZ", "TUSxxx", "TDFxxx"],
+    ["RimRock(TOC9500)", "IWAxxx", "TFDxxx"],
+    ["Descend5500", "IWAxxx", "TFDxxx"],
+    ["Estates", "IWAxxx", "TFDxxx"],
+    ["FountainHills", "IWAxxx", "TFDxxx"],
+    ["KFFZ", "IWA320", "TFD002"]
+  ],
+  "route": [
+    [75, 178, 12, 9500],
+    [112, 178, 38, 9500],
+    [112, 178, 15, 5500],
+    [112, 178, 10, 3500],
+    [112, 178, 9, 2400]
+  ],
+  "cas": 107,
+  "gph": 7.4,
+  "time": "1800",
+  "notes": "Some notes"
+}

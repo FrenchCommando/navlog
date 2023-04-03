@@ -4,9 +4,9 @@
   "alternate": "KIWA",
   "fuel": 30,
   "altitude": 6500,
-  "temp": 20,
+  "temp": 10,
   "vor": ["GBN", "TFD", "TUS"],
-  "winds": [285, 3],
+  "winds": [231, 20],
   "checkpoints": [
     ["KRYN", "TUS269", "TDF129"],
     ["UltralightStrip", "TUS285", "TDF130"],

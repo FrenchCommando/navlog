@@ -4,9 +4,9 @@
   "alternate": "KIWA",
   "fuel": 20,
   "altitude": 5500,
-  "temp": 20,
+  "temp": 10,
   "vor": ["IWA", "TFD", "GBN"],
-  "winds": [285, 3],
+  "winds": [235, 23],
   "checkpoints": [
     ["kE63", "GBNX", "TFD265"],
     ["Cemetery", "GBN069", "TFD268"],
