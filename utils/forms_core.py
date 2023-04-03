@@ -207,7 +207,6 @@ def get_dev_value(mh):
 
 
 def get_climb_performance(prev_altitude, default=None):
-    print(prev_altitude)
     if prev_altitude is None:
         return get_climb_performance(prev_altitude=default)
     return dict(
@@ -239,7 +238,6 @@ def fill_contents(dict_input):
 
         @staticmethod
         def build_one(data):
-            print(data)
             d = {}
             origin_airport = data["origin"]
             destination_airport = data["destination"]
@@ -405,8 +403,6 @@ def fill_contents(dict_input):
                     string=key,
                 ) is not None
             ]
-            print(item)
-            print(checkpoint_indices)
             numbered_keys_to_copy_point = [
                 'checkpoint',
                 'vor_ident',
